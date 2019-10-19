@@ -100,6 +100,8 @@ Rebuild the application and check whether the result target folder has that depe
 
 Once succeed, run the application using the command shown above, open http://localhost:9090/ and view different categories on the website to generate sample log data. Once the data is generated, it will be automatically sent out to event hub, and then reached the storage account blob storage based on your configuration. 
 
+sample source code: https://github.com/xuhongl/Log-Egress-EH 
+
 
 ### Use Azure Function to Convert the Format and Match the Entries
 Azure Event Hubs enables you to automatically capture the streaming data in Event Hubs in an Azure Blob storage or Azure Data Lake Storage account of your choice. Captured data is written in Apache Avro format: a compact, fast, binary format that provides rich data structures with inline schema. This format is widely used in the Hadoop ecosystem, Stream Analytics, and Azure Data Factory. You can view these files in any tool such as Azure Storage Explorer. You can also download the files locally to work on them.
