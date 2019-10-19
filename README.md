@@ -31,21 +31,21 @@ Use the Application Insights Java agent in AI-Agent.xml file:
 
 Add logging libraries to the project to pom.xml:
 ```
-    	<dependency>
-			<groupId>com.microsoft.azure</groupId>
-			<artifactId>applicationinsights-web-auto</artifactId>
-			<version>2.5.0</version>
-		</dependency>
-       <dependency>
-          <groupId>com.microsoft.azure</groupId>
-          <artifactId>applicationinsights-logging-log4j1_2</artifactId>
-          <version>[2.0,)</version>
-       </dependency>
-	   	<dependency>
-			<groupId>com.microsoft.azure</groupId>
-			<artifactId>applicationinsights-spring-boot-starter</artifactId>
-			<version>1.1.1</version>
-		</dependency>
+<dependency>
+<groupId>com.microsoft.azure</groupId>
+<artifactId>applicationinsights-web-auto</artifactId>
+<version>2.5.0</version>
+</dependency>
+<dependency>
+<groupId>com.microsoft.azure</groupId>
+<artifactId>applicationinsights-logging-log4j1_2</artifactId>
+<version>[2.0,)</version>
+</dependency>
+<dependency>
+<groupId>com.microsoft.azure</groupId>
+<artifactId>applicationinsights-spring-boot-starter</artifactId>
+<version>1.1.1</version>
+</dependency>
 ```
 
 Add the appender to log4f.properties
