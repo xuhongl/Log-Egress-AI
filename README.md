@@ -75,6 +75,7 @@ Set up log ingress to storage account by going to selected Application Insights 
 
 ## Solution 2: Log4j + Appender to Azure Event Hub + Azure Storage Account + Azure Function
 Sample source code contains Java application and log appender: https://github.com/xuhongl/Log-Egress-EH 
+
 Sample source code for Azure Function: https://github.com/xuhongl/Format-Converter-Blob 
 
 ### Provision Event Hub and Storage Account in Azure platform
