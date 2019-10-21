@@ -5,6 +5,7 @@ Log aggregation, literally speaking, refers to "gathering log files and sending 
 With that being said, designing a log aggregation solution is essential to a modern application. This sometimes becomes an "after-thought" in the application development process since the development team would first concentrate on solving the core business use cases. In addition, log aggregating has become a common need hence various different existing solutions have been proposed already. You might want to avoid the scenarios of re-inventing the wheels. For example, if your application is hosted on Azure there will be activity logs and diagnostic logs (if enabled) collected. You can choose a log ingesting tool such as Azure Event Hub to dump the logs to a storage account for longer retention, or integrate with other SIEM tools such as QRadar or Splunk. However, if you want to generate customized logs that contain the information you need, you might want to use other logging services. In this article, an example Java application that utilized Apache Log4j as its logging tool and two different solutions both consist of log egress and ingress process will be demonstrated. 
 
 ## Solution 1: Apache Log4j + Appender to Azure Application Insights + Azure Storage Account
+Sample source code: https://github.com/xuhongl/Log-Egress-AI 
 ### Set up Application Insights resource in Azure platform
 Application Insights is an Application Performance Management (APM) service for web developers on multiple platforms. It can be used to monitor your live web application, detect performance anomalies, visualize issues and usabilities. 
 
@@ -13,7 +14,6 @@ How to provision a new Application Insights resource: https://docs.microsoft.com
 ### Configure and run Application in containers using Tomcat
 Log4j is a fail-stop logging tool that helps the developer to output log statements a variety of output targets. Apache Log4j 2 is an upgrade to Log4j that provides significant improvements over its predecessor, Log4j 1.x, and provides many of the improvements available in Logback while fixing some inherent problems in Logback’s architecture (https://logging.apache.org/). To showcase the demo, we build an example java application which ontains Log4j integration to generate audit logs. 
 
-The source code of this project can be found here: https://github.com/xuhongl/Log-Egress-AI 
 
 In this solution, we use log4j application insights appender to collect trace logs and send them automatically to the Azure Application Insights resource where the logs can be displayed and explored. 
 
@@ -74,6 +74,8 @@ Set up log ingress to storage account by going to selected Application Insights 
 
 
 ## Solution 2: Log4j + Appender to Azure Event Hub + Azure Storage Account + Azure Function
+Sample source code contains Java application and log appender: https://github.com/xuhongl/Log-Egress-EH 
+Sample source code for Azure Function: https://github.com/xuhongl/Format-Converter-Blob 
 
 ### Provision Event Hub and Storage Account in Azure platform
 Create an event hub namespace and an event hub in Azure portal: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
@@ -100,8 +102,6 @@ Rebuild the application and check whether the result target folder has that depe
 
 Once succeed, run the application using the command shown above, open http://localhost:9090/ and view different categories on the website to generate sample log data. Once the data is generated, it will be automatically sent out to event hub, and then reached the storage account blob storage based on your configuration. 
 
-sample source code: https://github.com/xuhongl/Log-Egress-EH 
-
 
 ### Use Azure Function to Convert the Format and Match the Entries
 Azure Event Hubs enables you to automatically capture the streaming data in Event Hubs in an Azure Blob storage or Azure Data Lake Storage account of your choice. Captured data is written in Apache Avro format: a compact, fast, binary format that provides rich data structures with inline schema. This format is widely used in the Hadoop ecosystem, Stream Analytics, and Azure Data Factory. You can view these files in any tool such as Azure Storage Explorer. You can also download the files locally to work on them.
@@ -117,6 +117,3 @@ The function project consists of four files: YourFunctionName.csproj, YourTrigge
 ```
 
 Then change the YourFunctionName.cs according to the github repo provided above. 
-
-
-sample source code: https://github.com/xuhongl/Format-Converter-Blob 
