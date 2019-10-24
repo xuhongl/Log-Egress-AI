@@ -14,8 +14,19 @@ How to provision a new Application Insights resource: https://docs.microsoft.com
 ### Configure and run Application in containers using Tomcat
 Log4j is a fail-stop logging tool that helps the developer to output log statements a variety of output targets. Apache Log4j 2 is an upgrade to Log4j that provides significant improvements over its predecessor, Log4j 1.x, and provides many of the improvements available in Logback while fixing some inherent problems in Logback’s architecture (https://logging.apache.org/). To showcase the demo, we build an example java application which ontains Log4j integration to generate audit logs. 
 
+You can choose to build image of this application by the provided dockerfile, and then run that image inside a container, 
+or to run this application directly in interactive mode.
 
-In this solution, we use log4j application insights appender to collect trace logs and send them automatically to the Azure Application Insights resource where the logs can be displayed and explored. 
+Build and run the application
+```
+mvn clean package
+mvn tomcat7:run
+```
+
+###
+
+### Set up log egress from java application to Azure Application Insights
+In this solution, we use log4j application insights appender to collect trace logs and send them automatically to the Azure Application Insights resource where the logs can be displayed and explored. More details of this appender can be found here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/java-trace-logs. 
 
 Use the Application Insights Java agent in AI-Agent.xml file:
 ```
@@ -63,13 +74,9 @@ log4j.appender.R=com.microsoft.applicationinsights.log4j.v1_2.ApplicationInsight
 log4j.appender.R.instrumentationKey=ed8a0337-d85a-46d6-9448-4c9f67165808
 ```
 
-Build and run the application
-```
-mvn clean package
-mvn tomcat7:run
-```
 
-### Export log data from Application Insights to Storage Account Blob Storage
+
+### Export log data from Azure Application Insights to Storage Account Blob Storage
 Set up log ingress to storage account by going to selected Application Insights resources -> "Configuration" -> "Continuous Export"
 
 
